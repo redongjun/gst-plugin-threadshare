@@ -26,6 +26,7 @@ extern crate gobject_subclass;
 extern crate gst_plugin;
 #[macro_use]
 extern crate gstreamer as gst;
+extern crate gstreamer_audio as gst_audio;
 
 extern crate futures;
 extern crate tokio;
@@ -43,6 +44,9 @@ extern crate lazy_static;
 
 extern crate net2;
 
+extern crate byte_slice_cast;
+extern crate muldiv;
+
 mod iocontext;
 
 mod udpsocket;
@@ -52,12 +56,14 @@ mod appsrc;
 mod dataqueue;
 mod proxy;
 mod queue;
+mod tonesrc;
 
 fn plugin_init(plugin: &gst::Plugin) -> bool {
     udpsrc::register(plugin);
     queue::register(plugin);
     proxy::register(plugin);
     appsrc::register(plugin);
+    tonesrc::register(plugin);
     true
 }
 
